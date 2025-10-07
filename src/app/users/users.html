@@ -12,3 +12,19 @@
 } @else {
     <p>La edad es menor o igual a 20</p>
 }
+@switch (edad) {
+    @case (20) {
+        <p>La edad es 20</p>
+    } 
+    @case (25) {
+        <p>La edad es 25</p>
+    }
+    @default {
+        La edad es {{ edad }}
+    }
+}
+
+
+
+<user-list [users]="usersList"></user-list>
+<app-user-form (sendUser)="onAddUser($event)"></app-user-form>
