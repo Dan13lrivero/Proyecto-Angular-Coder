@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Users } from '../../users';
+import { User } from '../../interface/User';
 
 @Component({
   selector: 'app-user-form',
@@ -10,7 +10,7 @@ import { Users } from '../../users';
 })
 export class UserForm {
   public userForm: FormGroup;
-  @Output() sendUser = new EventEmitter<Users>();
+  @Output() sendUser = new EventEmitter<User>();
   constructor(private fb: FormBuilder) {
     this.userForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],

@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { User } from './interface/User'; 
+import { MatTableDataSource } from '@angular/material/table';
+
 
 @Component({
   selector: 'app-users',
@@ -14,15 +16,26 @@ export class Users {
 
   h1Style = 'font-size: 25px; color: red;'
 
-  users: User[] = [
-    { nombre: 'Norka', apellido: 'Garcia' },
-    { nombre: 'Juan', apellido: 'Perez' },
-    { nombre: 'Maria', apellido: 'Lopez' }
+  usersList: User[] = [
+    { id:1, nombre: 'norka', apellido: 'garcia', email: 'norka@gmail.com' },
+    { id:2, nombre: 'juan', apellido: 'perez', email: 'juan@gmail.com' },
+    { id:3, nombre: 'maria', apellido: 'lopez', email: 'maria@gmail.com' },
+    { id:4, nombre: 'pedro', apellido: 'gonzalez', email: 'pedro@gmail.com' },
+    { id:5, nombre: 'ana', apellido: 'diaz', email: 'ana@gmail.com' },
+    { id:6, nombre: 'luis', apellido: 'fernandez', email: 'luis@gmail.com' },
+    { id:7, nombre: 'sofia', apellido: 'martinez', email: 'sofia@gmail.com' },
+    { id:8, nombre: 'miguel', apellido: 'garcia', email: 'miguel@gmail.com' },
+    { id:9, nombre: 'elena', apellido: 'hernandez', email: 'elena@gmail.com' },
+    { id:10, nombre: 'carlos', apellido: 'lopez', email: 'carlos@gmail.com' },
+    { id:11, nombre: 'laura', apellido: 'perez', email: 'laura@gmail.com' },
   ];
 
-  usersList: User[] = [];
+  onAddUser(user: User) {
+    console.log(user);
+  this.usersList.push({
+    ...user,
+    id: this.usersList[this.usersList.length - 1].id + 1,
+  });
+}
 
-  onAddUser(user: Users) {
-    this.usersList.push(user)
-  }
 }
