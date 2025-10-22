@@ -1,7 +1,9 @@
-import { Component, Input, ViewChild  } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild  } from '@angular/core';
 import { User } from '../../interface/User'
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { UserServices } from '../../../services/user-service';
+import { ActivationStart } from '@angular/router';
  
 @Component({
   selector: 'user-list',
@@ -12,15 +14,28 @@ import { MatPaginator } from '@angular/material/paginator';
 export class UsersList {
   @Input() users: User[] = [];
 
-  displayedColumns: string[] = ['nombreCompleto', 'email']
+  displayedColumns: string[] = ['nombreCompleto', 'email', 'actions']
   dataSource = new MatTableDataSource<User>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.data = this.users;
-
+  constructor(private userService: UserServices) {
+    this.userService.users$.subscribe((users) => {
+      this.dataSource.data = users;
+    })
   }
 
+  
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.userService.getUsers();
+  }
+
+    onEditUser(id: number) {
+      this.userService.setUpdateUser(id);
+    }
+    onDeleteUser(id: number) {
+      this.userService.deleteUser(id);
+    }
 }

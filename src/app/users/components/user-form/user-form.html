@@ -25,7 +25,9 @@
             <div class="alert alert-danger">Error con el email</div>
         }
          
-        <button matButton="filled" type="submit">Crear Usuario</button>
+        <button matButton="filled" type="submit">
+            {{ isEditing ? 'Editar' : 'Crear'}}
+        </button>
         
     </form>
 </div>

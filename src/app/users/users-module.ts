@@ -12,6 +12,8 @@ import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from '../shared/shared-module';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { UserServices } from '../services/user-service';
+
 
 
 
@@ -20,6 +22,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     Users,
     UsersList,
     UserForm
+  ],
+  providers: [
+    UserServices
   ],
   imports: [
     SharedModule, CommonModule, FormsModule, ReactiveFormsModule, MatTableModule, MatPaginatorModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatToolbarModule, MatSidenavModule

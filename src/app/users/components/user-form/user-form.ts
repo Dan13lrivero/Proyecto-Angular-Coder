@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../interface/User';
+import { UserServices } from '../../../services/user-service';
 
 @Component({
   selector: 'app-user-form',
@@ -10,13 +11,36 @@ import { User } from '../../interface/User';
 })
 export class UserForm {
   public userForm: FormGroup;
-  @Output() sendUser = new EventEmitter<User>();
-  constructor(private fb: FormBuilder) {
+  isEditing: boolean = false;
+  
+  constructor(private fb: FormBuilder, private userService: UserServices) {
     this.userForm = this.fb.group({
+      id: [''],
       nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
       apellido: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
       email: ['', [Validators.email]]
     });
+
+    this.userService.userEdit$.subscribe((user) => {
+      if(user) {
+        this.userForm.patchValue({
+          id: user.id,
+          nombre: user.nombre,
+          apellido: user.apellido,
+          email: user.email,
+        })
+        this.isEditing = true;
+      } else {
+        this.isEditing = false;
+        this.userForm.reset();
+      }
+    })
+
+  }
+
+
+
+  ngOnChanges(){
   }
 
   onSubmit() {
@@ -25,7 +49,14 @@ export class UserForm {
       return;
     }
 
-    this.sendUser.emit(this.userForm.value);
+    if (this.isEditing) {
+      this.userService.updateUser(this.userForm.value.id, this.userForm.value);
+    } else {
+      this.userService.addUser(this.userForm.value);
+    }
+
+    this.userForm.reset();
+    this.isEditing = false;
   }
   get isNombreInvalid() {
     return this.userForm.controls['nombre'].dirty && this.userForm.controls['nombre'].invalid;

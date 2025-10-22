@@ -1,0 +1,100 @@
+.example-container {
+  width: 100%;
+  height: 100%;
+}
+
+.example-sidenav-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+.example-spacer {
+    flex: 1 1 auto;
+}
+.example-card {
+    max-width: 400px;
+}
+.example-sidenav {
+  padding: 20px;
+}
+.sidenav-container {
+  display: flex;
+  flex-direction: row;
+  width: 98vw;
+  min-height: 100vh;
+  margin: 1rem auto;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  gap: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.sidebar {
+  width: 220px;
+  min-width: 150px;
+  background-color: transparent;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.sidebar a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0.5rem 0;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  gap: 1rem;
+}
+
+.navbar-card {
+  width: 100%;
+  max-width: 1200px;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.navbar-card mat-toolbar {
+  justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  .sidenav-container {
+    width: 96vw;
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidenav-container {
+    flex-direction: column;
+    width: 95%;
+    padding: 0.5rem;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 2px solid #fff;
+    margin: 0.5rem 0;
+  }
+
+  .navbar-card {
+    max-width: 100%;
+  }
+}
+
